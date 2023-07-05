@@ -1,0 +1,245 @@
+CREATE (Leda:Perfil {name: 'Leda', birthday: '26/12/1996', country: "BR", city:'Niterói', sex: 'female',religion:'none', civilStatus: 'Married'})
+
+CREATE (José:Perfil {name: 'José', birthday: '11/11/2001', country: "BR", city:'Rio de Janeiro', sex: 'male',religion:'Atheist', civilStatus: 'Single'})
+
+CREATE (Mauro:Perfil {name: 'Mauro', birthday: '01/01/2011', country: "BR", city:'São Paulo', sex: 'male',religion:'Catholic', civilStatus: 'Single'})
+
+CREATE (Erika:Perfil {name: 'Erika', birthday: '10/02/1990', country: "BR", city:'Campinas', sex: 'female',religion:'Catholic', civilStatus: 'Widow'})
+
+CREATE (Daniel:Perfil {name: 'Daniel', birthday: '11/11/1982', country: "BR", city:'Niterói', sex: 'male',religion:'none', civilStatus: 'Married'})
+
+CREATE (Edilson:Perfil {name: 'Edilson', birthday: '30/01/1985', country: "BR", city:'Brasília', sex: 'male',religion:'Atheist', civilStatus: 'Married'})
+
+CREATE (Aline:Perfil {name: 'Aline', birthday: '30/06/1989', country: "BR", city:'Rio de Janeiro', sex: 'female',religion:'Catholic', civilStatus: 'Married'})
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'José' AND b.name = 'Aline'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Mauro' AND b.name = 'Aline'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Mauro' AND b.name = 'Leda'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Mauro' AND b.name = 'Erika'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Mauro' AND b.name = 'Edilson'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Mauro' AND b.name = 'Daniel'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Leda' AND b.name = 'Erika'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Leda' AND b.name = 'Edilson'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Erika' AND b.name = 'Aline'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Daniel' AND b.name = 'Edilson'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Perfil),
+  (b:Perfil)
+WHERE a.name = 'Daniel' AND b.name = 'Aline'
+CREATE (a)-[r:Friend]->(b)
+RETURN type(r)
+CREATE (Mauro_Mensagem_001:Message {name:'Mauro_Mensagem_001' , content: 'Bom Dia !!'})
+
+MATCH
+  (a:Perfil),
+  (b:Message)
+WHERE a.name = 'Mauro' AND b.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Sender]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'Leda' AND a.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'Erika' AND a.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'Edilson' AND a.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'Aline' AND a.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'Daniel' AND a.name = 'Mauro_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
+CREATE (Mauro_Imagem_001:Image {name:'Mauro_Imagem_001' , content: 'https://i.pinimg.com/originals/4d/18/39/4d18398b7f4c04b9a21439bc7e6f1ba6.jpg'})
+
+MATCH
+  (a:Perfil),
+  (b:Image)
+WHERE a.name = 'Mauro' AND b.name = 'Mauro_Imagem_001'
+CREATE (a)-[r:Post_Image]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Image),
+  (b:Perfil)
+WHERE b.name = 'Leda' AND a.name = 'Mauro_Imagem_001'
+CREATE (b)-[r:Commentary {content: 'Que fofo !!'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Image),
+  (b:Perfil)
+WHERE b.name = 'Erika' AND a.name = 'Mauro_Imagem_001'
+CREATE (b)-[r:Commentary {content: 'Olha os olhinhos !! Meu Deus !!'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Image),
+  (b:Perfil)
+WHERE b.name = 'Edilson' AND a.name = 'Mauro_Imagem_001'
+CREATE (b)-[r:Commentary {content: 'Eu gosto de Gatos.'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Image),
+  (b:Perfil)
+WHERE b.name = 'Aline' AND a.name = 'Mauro_Imagem_001'
+CREATE (b)-[r:Commentary {content: 'Nossa !! Como ele Cresceu !!'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Image),
+  (b:Perfil)
+WHERE b.name = 'Daniel' AND a.name = 'Mauro_Imagem_001'
+CREATE (b)-[r:Commentary {content: 'Não adianta postar Gatos. Sua nota nesse projeto vai ser bem pequena. =)'}]->(a)
+RETURN type(r)
+
+CREATE (Aline_Texto_001:Text {name:'Aline_Texto_001' , content: 'A pedra
+
+
+O distraído, nela tropeçou,
+o bruto a usou como projétil,
+o empreendedor, usando-a construiu,
+o campônio, cansado da lida,
+dela fez assento.
+Para os meninos foi brinquedo,
+Drummond a poetizou,
+Davi matou Golias...
+Por fim;
+o artista concebeu a mais bela escultura.
+Em todos os casos,
+a diferença não era a pedra.
+Mas o homem.'})
+
+MATCH
+  (a:Perfil),
+  (b:Text)
+WHERE a.name = 'Aline' AND b.name = 'Aline_Texto_001'
+CREATE (a)-[r:Post_Text]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Text),
+  (b:Perfil)
+WHERE b.name = 'Daniel' AND a.name = 'Aline_Texto_001'
+CREATE (b)-[r:Commentary {content: 'Se acha que isso vai salvar a sua nota, você está muito enganado. rsrsrsrs'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Text),
+  (b:Perfil)
+WHERE b.name = 'Mauro' AND a.name = 'Aline_Texto_001'
+CREATE (b)-[r:Commentary {content: 'Bom dia, minha amiga. Que Poema lindo !!'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Text),
+  (b:Perfil)
+WHERE b.name = 'Erika' AND a.name = 'Aline_Texto_001'
+CREATE (b)-[r:Commentary {content: 'Esse poema me fez enxergar as coisas com um novo olhar !! Magnífico !!'}]->(a)
+RETURN type(r)
+
+MATCH
+  (a:Text),
+  (b:Perfil)
+WHERE b.name = 'José' AND a.name = 'Aline_Texto_001'
+CREATE (b)-[r:Commentary {content: 'Esse poema me lembra gatos.'}]->(a)
+RETURN type(r)
+
+CREATE (Aline_Mensagem_001:Message {name:'Aline_Mensagem_001' , content: 'Que mensagem chata.'})
+
+MATCH
+  (a:Perfil),
+  (b:Message)
+WHERE a.name = 'Aline' AND b.name = 'Aline_Mensagem_001'
+CREATE (a)-[r:Sender]->(b)
+RETURN type(r)
+
+MATCH
+  (a:Message),
+  (b:Perfil)
+WHERE b.name = 'José' AND a.name = 'Aline_Mensagem_001'
+CREATE (a)-[r:Receiver]->(b)
+RETURN type(r)
+
