@@ -1,0 +1,7 @@
+//Find José's Friends of Friends - Encontrar os amigos dos amigos de José
+MATCH (nome {name: 'José'})-[:Friend]-()<-[:Friend]->(f)
+Return f.name
+
+//Find the people that commented on a José's Post - Encontrar as pessoas que comentaram em um post de josé
+MATCH ({name: 'José'})-[:Friend]-(f)-[c:Commentary]-({name: 'Mauro_Imagem_001'})
+Return f.name, c.content
